@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Yoursite_Newpage>
+      <version>0.1.0</version>
+    </Yoursite_Newpage>
+
+    <frontend>
+      <routers>
+        <newpage>
+          <use>standard</use>
+          <args>
+            <module>Yoursite_Newpage</module>
+            <frontName>newpage</frontName>
+          </args>
+        </newpage>
+      </routers>
+
+      <!-- <layout>
+        <updates>
+          <newpage>
+            <file>newpage.xml</file>
+          </newpage>
+        </updates>
+      </layout> -->
+
+    </frontend>
+
+  </modules>
+
+
+</config>

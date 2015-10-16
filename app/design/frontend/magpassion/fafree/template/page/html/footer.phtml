@@ -1,0 +1,76 @@
+<?php
+/**
+ * @category   	MagPassion Theme
+ * @package    	MagPassion_Sample
+ * @author     	MagPassion
+ * @email		magentopassion@gmail.com
+ * @copyright   Copyright (c) 2013 MagentoPassion. (http://www.magentopassion.com)
+ * @license    	http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?php
+    $mp_fspot1 = Mage::getModel('cms/block')->setStoreId(Mage::app()->getStore()->getId())->load('footer_spot1');
+    $mp_fspot2 = Mage::getModel('cms/block')->setStoreId(Mage::app()->getStore()->getId())->load('footer_spot2');
+    $mp_fspot3 = Mage::getModel('cms/block')->setStoreId(Mage::app()->getStore()->getId())->load('footer_spot3');
+
+    $helper = Mage::helper('cms');
+    $processor = $helper->getPageTemplateProcessor();
+    //echo $processor->filter($block->getContent()); 
+
+?>
+<div class="mp_footerspot clearer">
+        <div class="spot1">
+            <?php if($mp_fspot1->getContent()):?>
+            <div class="clearer">
+                <h3><?php echo $mp_fspot1->getTitle(); ?></h3>
+            </div>
+            <div class="block-content">
+                <?php echo $processor->filter($mp_fspot1->getContent()); ?>
+            </div>
+            <?php else: ?>
+                please create static block with id = "footer_spot1".
+            <?php endif;?>
+        </div>
+        <div class="spot2">
+            <?php if($mp_fspot2->getContent()):?>
+            <div class="clearer">
+                <h3><?php echo $mp_fspot2->getTitle(); ?></h3>
+            </div>
+            <div class="block-content clearer">
+                <?php echo $processor->filter($mp_fspot2->getContent()); ?>
+            </div>
+            <?php else: ?>
+                please create static block with id = "footer_spot2".
+            <?php endif;?>
+        </div>
+        <div class="spot3">
+            <?php if($mp_fspot3->getContent()):?>
+            <div class="clearer">
+                <h3><?php echo $mp_fspot3->getTitle(); ?></h3>
+            </div>
+            <div class="block-content">
+                <?php echo $processor->filter($mp_fspot3->getContent()); ?>
+            </div>
+            <?php else: ?>
+                please create static block with id = "footer_spot3".
+            <?php endif;?>
+        </div>
+</div>
+<div class="footer-container clearer">
+   
+    <div class="footer">
+        <?php echo $this->getChildHtml('bottomContainer') ?>
+        
+        <div class="f-left">
+            <?php //echo $this->getChildHtml('cms_footer_links') ?>
+            
+            
+           
+            <address><?php echo $this->getCopyright() ?></address>
+            <!--Do not remove this if you use product under our free license --><span style="text-transform: none;font-size: 10px;">Power by Magento Open Source. Design by <a href="http://www.magpassion.com" title="Magento Themes, Extensions, Modules, Services | MagPassion">MagPassion</a></span>
+        </div>
+        <div class="f-right">
+            <?php echo $this->getChildHtml('footer_links') ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<!-- <default>
+  <reference name="left">
+      <block type="cms/block">
+          <action method="setBlockId"><block_id>test1</block_id></action>
+      </block>
+  </reference>
+</default> -->

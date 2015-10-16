@@ -1,0 +1,126 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Page_Block_Html_Topmenu
+ */
+?>
+<?php //$_menu = $this->getHtml('level-top') ?>
+<?php $base_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); ?>
+
+<nav id="samll-img-nav" class="beer-img-nav">
+  <ol class="beer-nav-list img-list">
+    <li>
+      <a href="https://www.facebook.com" target="_blank">
+        <img class="dis-inline" alt="" src=<?php echo $base_url."wysiwyg/icons/ISB_inner_FB_icon.png"; ?> />
+      </a>
+    </li>
+    <li>
+      <a href="https://twitter.com" target="_blank">
+        <img class="dis-inline" alt="" src=<?php echo $base_url."wysiwyg/icons/ISB_iner_twitter_icon.png"; ?> />
+      </a>
+    </li>
+    <li>
+      <a href="https://instagram.com" target="_blank">
+        <img class="dis-inline" alt="" src=<?php echo $base_url."wysiwyg/icons/ISB_inner_insta_icon.png"; ?> />
+      </a>
+    </li>
+    <li>
+      <a href="http://www.youtube.com" target="_blank">
+        <img class="dis-inline" alt="" src=<?php echo $base_url."wysiwyg/icons/ISB_inner_youtube_icon.png"; ?> />
+      </a>
+    </li>
+  </ol>
+</nav>
+
+
+
+<nav id="samll-nav" class="beer-nav">
+    <ol class="beer-nav-list">
+        <li class="level0 nav-1">
+        	<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>events-and-tastings">
+            EVENTS &amp; TASTINGS</a>
+      	</li>
+        <li class="beer-li-separator">|</li>
+        <li class="level0 nav-2">
+        	<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>about-us">
+            ABOUT US</a>
+      	</li>
+        <li class="beer-li-separator">|</li>
+        <li class="level0 nav-3">
+        	<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>customer/account/create">
+            JOIN CLUB IBS</a>
+      	</li>
+        <li class="beer-li-separator">|</li>
+        <li class="level0 nav-3">
+          <?php if (Mage::getSingleton('customer/session')->isLoggedIn()) : ?>
+      		<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>customer/account/index">
+            MY ACCOUNT</a>
+          <?php else: ?>
+            <a class="level0" href="<?php echo Mage::getBaseUrl(); ?>customer/account/login">
+              SIGN IN</a>
+          <?php endif; ?>
+    		</li>
+        <li class="beer-li-separator">|</li>
+        <li class="level0 nav-4">
+      		<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>contact-us">
+            CONTACT</a>
+    		</li>
+    </ol>
+</nav>
+
+<nav id="nav" class="beer-nav">
+    <ol class="beer-nav-list">
+        <li class="level0 nav-1 first active">
+        	<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>home">HOME</a>
+      	</li>
+        <li class="level0 nav-2">
+        	<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>beers">BEERS</a>
+      	</li>
+        <li class="level0 nav-3">
+        	<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>cider-and-spirits">CIDER &amp; SPIRITS</a>
+      	</li>
+        <li class="level0 nav-3">
+      		<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>beer-styles">BEER STYLES</a>
+    		</li>
+        <li class="level0 nav-4">
+      		<a class="level0" href="<?php echo Mage::getBaseUrl(); ?>gift-packs">GIFT PACKS</a>
+    		</li>
+        <li>
+          <div class="header-minicart">
+              <?php echo $this->getChildHtml('topSearch'); ?>
+          </div>
+        </li>
+        <li>
+          <div class="header-minicart">
+              <?php echo $this->getChildHtml('minicart_head'); ?>
+          </div>
+        </li>
+    </ol>
+</nav>

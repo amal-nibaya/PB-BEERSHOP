@@ -1,0 +1,128 @@
+%!Adobe-FontList 1.16
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:D:\WORK\Personal\Macaquee\Nibaya\Ausi Bar\documents-export-2015-09-22\Coding_PB\Package\Document fonts\HelveticaNeue.dfont
+FileModTime:1410258184
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MinionPro-Regular
+FamilyName:Minion Pro
+StyleName:Regular
+FullName:Minion Pro
+MenuName:Minion Pro
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\WORK\Personal\Macaquee\Nibaya\Ausi Bar\documents-export-2015-09-22\Coding_PB\Package\Document fonts\MinionPro-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+FileLength:218640
+FileModTime:1377983288
+WeightClass:400
+WidthClass:5
+AngleClass:0
+DesignSize:110
+NameArray:0,Mac,4,Minion Pro
+NameArray:0,Win,1,Minion Pro
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Montserrat-Regular
+FamilyName:Montserrat
+StyleName:Regular
+FullName:Montserrat-Regular
+MenuName:Montserrat
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\WORK\Personal\Macaquee\Nibaya\Ausi Bar\documents-export-2015-09-22\Coding_PB\Package\Document fonts\Montserrat-Regular.ttf
+DataFormat:sfntData
+FileLength:29016
+FileModTime:1405520304
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Montserrat-Regular
+NameArray:0,Win,1,Montserrat
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Thonburi
+FamilyName:Thonburi
+StyleName:Regular
+FullName:Thonburi
+MenuName:Thonburi
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\WORK\Personal\Macaquee\Nibaya\Ausi Bar\documents-export-2015-09-22\Coding_PB\Package\Document fonts\Thonburi.ttc
+TTCOffset:36
+DataFormat:sfntData
+FileLength:2408236
+FileModTime:1410260058
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Thonburi
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Thonburi-Bold
+FamilyName:Thonburi
+StyleName:Bold
+FullName:Thonburi Bold
+MenuName:Thonburi
+StyleBits:2
+WritingScript:Roman
+OutlineFileName:D:\WORK\Personal\Macaquee\Nibaya\Ausi Bar\documents-export-2015-09-22\Coding_PB\Package\Document fonts\Thonburi.ttc
+TTCOffset:336
+DataFormat:sfntData
+FileLength:2408236
+FileModTime:1410260058
+WeightClass:700
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Thonburi Bold
+NameArray:0,Mac,4,Thonburi Gras
+NameArray:0,Mac,4,Thonburi Fett
+NameArray:0,Mac,4,Thonburi grassetto
+NameArray:0,Mac,4,Thonburi vet
+NameArray:0,Mac,4,Thonburi Fet
+NameArray:0,Mac,4,Thonburi Negrita
+NameArray:0,Mac,4,Thonburi Fed
+NameArray:0,Mac,4,Thonburi Carregado
+NameArray:0,Mac,4,Thonburi Halvfet
+NameArray:0,Mac,4,Thonburi lihava
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Thonburi-Light
+FamilyName:Thonburi
+StyleName:Light
+FullName:Thonburi Light
+MenuName:Thonburi
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\WORK\Personal\Macaquee\Nibaya\Ausi Bar\documents-export-2015-09-22\Coding_PB\Package\Document fonts\Thonburi.ttc
+TTCOffset:636
+DataFormat:sfntData
+FileLength:2408236
+FileModTime:1410260058
+WeightClass:300
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Thonburi Light
+%EndFont
+

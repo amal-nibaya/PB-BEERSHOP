@@ -1,0 +1,92 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Create account form template
+ *
+ * @see app/design/frontend/base/default/template/customer/form/register.phtml
+ */
+/** @var $this Mage_Customer_Block_Form_Register */
+?>
+<div class="account-create sidebar_item">
+    <div class="reg-page-title">
+        <h3>LIQUOR RETAILERS</h3>
+        <h1>JOIN THE PACK</h1>
+    </div>
+
+    <form action="join_the_pack" method="post" id="form-validate"
+      class="scaffold-form" enctype="multipart/form-data">
+      <div class="fieldset">
+        <ul class="form-list">
+          <li>
+            <div class="input-box">
+                <input type="text" id="firstname"
+                  name="firstname" value="" title="Name"
+                  maxlength="255" class="input-text required-entry"
+                  placeholder="Name">
+            </div>
+          </li>
+          <li>
+            <div class="input-box">
+                <input type="text" id="company"
+                  name="company" value="" title="Company"
+                  maxlength="255" class="input-text required-entry"
+                  placeholder="Company">
+            </div>
+          </li>
+          <li>
+            <div class="input-box">
+                <input type="text" id="address"
+                  name="address" value="" title="Address"
+                  maxlength="255" class="input-text required-entry"
+                  placeholder="Address">
+            </div>
+          </li>
+          <li>
+            <div class="input-box">
+                <input type="text" id="phone"
+                  name="phone" value="" title="Phone"
+                  maxlength="15" class="input-text required-entry"
+                  placeholder="Phone">
+            </div>
+          </li>
+          <li>
+            <div class="input-box">
+                <input type="email" autocapitalize="off"
+                  autocorrect="off" spellcheck="false" name="email" id="email_address"
+                  value="" placeholder="Email" class="input-text validate-email required-entry">
+            </div>
+          </li>
+      </ul>
+      <p class="reg-from-text">Your agent will be in touch within 42hrs</p>
+      </div>
+        <div class="pb-buttons-set">
+          <button type="submit" class="button go-fetch-btn">Go Fetch Woof <i class="woof-icon"></i></button>
+        </div>
+        <p>&nbsp;</p>
+    </form>
+</div>

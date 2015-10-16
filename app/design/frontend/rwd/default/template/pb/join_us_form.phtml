@@ -1,0 +1,196 @@
+<?php
+$error_join = "";
+function getParam($name) {
+  return (isset($_POST[$name]) && !empty($_POST[$name]))?$_POST[$name]:"";
+}
+
+function formSubmit() {
+  $sender_name = Mage::getStoreConfig('trans_email/ident_general/name');
+  $sender_email = Mage::getStoreConfig('trans_email/ident_general/name');
+  $storeId = Mage::app()->getWebsite()->getDefaultGroup()->getDefaultStoreId();
+  $to = Mage::getStoreConfig('trans_email/ident_support/email', $storeId);
+  $subject = "New request to join the phoenix club";
+  $message = "
+  <html>
+  <head>
+  <title>New request to join the phoenix club</title>
+  </head>
+  <body>
+  <p>New request to join the phoenix club!</p>
+  <table>
+  <tr>
+  <td>Name </td>
+  <td>".getParam('firstname')."</td>
+  </tr>
+  <tr>
+  <td>Company </td>
+  <td>".getParam('company')."</td>
+  </tr>
+  <tr>
+  <td>Email </td>
+  <td>".getParam('email')."</td>
+  </tr>
+  <tr>
+  <td>Phone </td>
+  <td>".getParam('phone')."</td>
+  </tr>
+  <tr>
+  <td>Address </td>
+  <td>".getParam('address')."</td>
+  </tr>
+  <tr>
+  <td>State </td>
+  <td>".getParam('state')."</td>
+  </tr>
+  <tr>
+  <td>Postcode </td>
+  <td>".getParam('postcode')."</td>
+  </tr>
+  </table>
+  </body>
+  </html>
+  ";
+
+  // Always set content-type when sending HTML email
+  $headers = "MIME-Version: 1.0" . "\r\n";
+  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+  // More headers
+  $headers .= 'From: <'.$sender_email.'>' . "\r\n";
+  // $headers .= 'Cc: myboss@example.com' . "\r\n";
+  mail($to,$subject,$message,$headers);
+
+  // echo "Request sent!";
+  $base_url = Mage::getBaseUrl();
+  header("Location: ".$base_url."join_the_pack_thanks");
+  die();
+}
+
+if($_POST['submit_join_us']) {
+
+
+  if(getParam('firstname') == "" ||
+    getParam('company') == "" ||
+    getParam('email') == "" ||
+    getParam('phone') == "" ||
+    getParam('address') == "" ||
+    getParam('state') == "" ||
+    getParam('postcode') == "") {
+    $error_join = '<ul class="messages">
+      <li class="error-msg">
+        <ul>
+          <li>
+            <span>Please fill all the fields.</span>
+          </li>
+          </ul>
+      </li>
+    </ul>';
+  }
+  else {
+    formSubmit();
+    unset($_POST);
+  }
+
+}
+?>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:transparent;margin:0px auto;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:0;overflow:hidden;word-break:normal;color:#333;background-color:#fff;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
+.tg .tg-cckh{background-color:#616161;color:white;vertical-align:top;font-weight: bold;font-size: 17px}
+.tg .tg-hj1s{color:white;vertical-align:top}
+.tbl-btn {height: 30px;min-width: 100%}
+.tbl-w {background-color: white !important; color:gray}
+.tbl-w:hover {background-color: white !important; color:gray !important}
+.tg input {background-color: gray;height: 34px;}
+.join_us_title h2{font-weight: bold;color:#D9273B !important}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}
+</style>
+
+<?php echo $error_join; ?>
+
+<div class="txt-center join_us_title">
+  <h2>WELCOME TO PHOENIX BEER</h2>
+  <h2>JOIN THE PACK</h2>
+</div>
+<div class="tg-wrap">
+  <form method="post" action="">
+  <table class="tg">
+  <tr>
+    <th class="tg-cckh" colspan="3">Application Form</th>
+  </tr>
+  <tr>
+    <td class="tg-hj1s">
+      <div class="input-box">
+          <input type="text" id="firstname"
+            name="firstname" value="<?php echo getParam('firstname'); ?>" title="Name"
+            maxlength="255" class="input-text required-entry"
+            placeholder="Name">
+      </div>
+    </td>
+    <td class="tg-hj1s">
+      <div class="input-box">
+          <input type="text" id="address"
+            name="address" value="<?php echo getParam('address'); ?>" title="Address"
+            maxlength="255" class="input-text required-entry"
+            placeholder="Address">
+      </div>
+    </td>
+    <td class="tg-hj1s">
+      <div class="input-box">
+          <input type="text" id="state"
+            name="state" value="<?php echo getParam('state'); ?>" title="State"
+            maxlength="255" class="input-text required-entry"
+            placeholder="State">
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-hj1s">
+      <div class="input-box">
+          <input type="text" id="company"
+            name="company" value="<?php echo getParam('company'); ?>" title="Company"
+            maxlength="255" class="input-text required-entry"
+            placeholder="Company">
+      </div>
+    </td>
+    <td class="tg-hj1s">
+      <div class="input-box">
+          <input type="text" id="phone"
+            name="phone" value="<?php echo getParam('phone'); ?>" title="Phone"
+            maxlength="15" class="input-text required-entry"
+            placeholder="Phone">
+      </div>
+    </td>
+    <td class="tg-hj1s">
+      <div class="input-box">
+          <input type="text" id="postcode"
+            name="postcode" value="<?php echo getParam('postcode'); ?>" title="Postcode"
+            maxlength="15" class="input-text required-entry"
+            placeholder="Postcode">
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-hj1s">
+      <div class="input-box">
+          <input type="email" autocapitalize="off"
+            autocorrect="off" spellcheck="false" name="email" id="email_address"
+            value="<?php echo getParam('email'); ?>" placeholder="Email"
+            class="input-text validate-email required-entry" title="Email" >
+      </div>
+    </td>
+    <td class="tg-hj1s">
+      <div class="input-box">
+        <a class="button go-fetch-btn tbl-btn tbl-w">We will be in contact within 42 hours</a>
+      </div>
+    </td>
+    <td class="tg-hj1s">
+      <div class="input-box">
+        <button type="submit" value="1" name="submit_join_us" class="button go-fetch-btn tbl-btn">JOIN THE PACK <i class="woof-icon"></i></button>
+      </div>
+    </td>
+  </tr>
+</table>
+</form>
+</div>

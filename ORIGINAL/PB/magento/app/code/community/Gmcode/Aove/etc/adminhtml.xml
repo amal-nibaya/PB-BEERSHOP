@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <Aove translate="title" module="aove">
+                                        <title>Aove Setting</title>
+                                    </Aove>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+	<menu>
+		<aove module="aove">
+			<title>Aove</title>
+			<sort_order>99</sort_order>
+			<children>
+				<items module="aove">
+					<title>Manage Items</title>
+					<sort_order>0</sort_order>
+					<action>aove/adminhtml_index</action>
+				</items>
+			</children>
+		</aove>
+	</menu>
+</config>

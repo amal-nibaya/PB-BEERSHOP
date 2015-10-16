@@ -1,0 +1,71 @@
+<script>
+  function writeCookie(key,value,days) {
+      if (days) {
+              var date = new Date();
+              date.setTime(date.getTime()+(days*24*60*60*1000));
+              var expires = "; expires="+date.toGMTString();
+      }
+      else var expires = "";
+      document.cookie = key+"="+value+expires+"; path=/";
+  }
+
+  function readCookie(key) {
+      var nameEQ = key + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+              var c = ca[i];
+              while (c.charAt(0)==' ') c = c.substring(1,c.length);
+              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+  }
+
+  function saidYes() {
+    writeCookie('ibs-magento','ok', 1);
+    window.location = "/home";
+  }
+
+  function saidNo() {
+    // alert('Ooops sorry!');
+  }
+
+  // at page init
+  if('ok' == readCookie('ibs-magento')) {
+    window.location = "/home";
+  }
+
+</script>
+<div id="welcome-logo-div"></div>
+<div id="welcome-main-div">
+  <h1 class="top_h1">WELCOME</h1>
+  <h4>ARE YOU OF LEGAL DRINKING AGE IN YOUR COUNTRY ?</h4>
+</div>
+<div id="welcome-btn-box">
+  <a id="btn_yes" class="welcome-btn" onclick="saidYes()">
+    Yes
+    <!-- <img src="skin/frontend/default/custom_theme/images/ibs/btn_yes.png" alt="Yes" /> -->
+  </a>
+  <a id="btn_no" class="welcome-btn" onclick="saidNo()">
+    No
+    <!-- <img src="skin/frontend/default/custom_theme/images/ibs/btn_no.png" alt="No" /> -->
+  </a>
+</div>
+<br>
+<div class="mid-div">
+<h4>WARNING</h4>
+<p>
+Under the Liquor Control Act 1988, it is an offence:<br>
+• To sell or supply liquor to a person under the age
+of 18 years on licensed or regulated premises; or<br>
+• For a person under the age of 18 years to purchase,
+or attempt to purchase, liquor on licensed or regulated premises.
+</p>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<!-- <div id="home_footer">
+
+<div> -->

@@ -1,0 +1,125 @@
+<?php
+$pb_category = (isset($_GET['pb_category']) && !empty($_GET['pb_category']))?$_GET['pb_category']:null;
+$pb_country = (isset($_GET['pb_country']) && !empty($_GET['pb_country']))?$_GET['pb_country']:null;
+$pb_brewery = (isset($_GET['pb_brewery']) && !empty($_GET['pb_brewery']))?$_GET['pb_brewery']:null;
+$pb_style = (isset($_GET['pb_style']) && !empty($_GET['pb_style']))?$_GET['pb_style']:null;
+
+$country = (isset($_GET['country_of_manufacture']) && !empty($_GET['country_of_manufacture']))?$_GET['country_of_manufacture']:'';
+$brewery = (isset($_GET['brewery']) && !empty($_GET['brewery']))?$_GET['brewery']:'';
+$style = (isset($_GET['style']) && !empty($_GET['style']))?$_GET['style']:'';
+$collection = array();
+
+
+function breweryHistory($pb_category, $pb_brewery) {
+  $attribute_id = 2; //brewery
+  $collection = Mage::getModel('aove/options')->getCollection();
+  $collection->addFieldToFilter('attribute_id', $attribute_id);
+  $collection->addFieldToFilter('title', $pb_brewery);
+  $collection->addFieldToFilter('perent_id', $pb_category);
+  return $collection;
+}
+
+function countryHistory($pb_category, $pb_country) {
+  $attribute_id = 1; //country
+  $collection = Mage::getModel('aove/options')->getCollection();
+  $collection->addFieldToFilter('attribute_id', $attribute_id);
+  $collection->addFieldToFilter('title', $pb_country);
+  $collection->addFieldToFilter('perent_id', $pb_category);
+  return $collection;
+}
+
+function beerProducts($pb_category, $pb_country, $pb_brewery,
+  $pb_style, $country, $brewery, $style) {
+
+  $collection = Mage::getModel('catalog/product')
+    ->getCollection()
+    ->addAttributeToSort('created_at', 'DESC')
+    ->addFieldToFilter('country_of_manufacture', $country)
+    ->addFieldToFilter('brewery', $brewery)
+    ->addFieldToFilter('style', $style)
+    ->addAttributeToSelect('*')
+    ->load();
+  return $collection;
+}
+
+function getMediaUrl($img) {
+  $base_url = Mage::getBaseUrl();
+  return $base_url."media/".$img;
+}
+
+function getContent($c) {
+  $s1 = str_replace('src="{{media url="wysiwyg/', "src='".getMediaUrl(""), $c);
+  return str_replace('"}}"', "'", $s1);
+}
+
+if($pb_category != null && $pb_country != null && $pb_brewery != null && $pb_style != null) { // products
+  $collection = beerProducts($pb_category, $pb_country, $pb_brewery,
+    $pb_style, $country, $brewery, $style);
+}
+else { // do nothing
+  $collection = array();
+}
+?>
+
+<script src="<?php echo $this->getJsUrl('slideshow/jquery.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo $this->getJsUrl('slick/slick.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo $this->getJsUrl('slideshow/jquery.easing.1.3.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo $this->getJsUrl('codaslider/jquery.coda-slider-3.0.js'); ?>" type="text/javascript"></script>
+<link href="<?php echo $this->getSkinUrl('codaslider/css/coda-slider.css'); ?>" type="text/css" rel="stylesheet"></link>
+<style>
+.hi-left-img {
+  width: 250px;
+}
+.hi-left-img-div {
+  display: inline-block;
+  float: left;
+}
+</style>
+<script type="text/javascript">
+jQuery.noConflict();
+jQuery(document).ready(function(){
+	jQuery('#beer-products').codaSlider({
+		autoSlide:true,
+		autoHeight:false,
+		dynamicTabsPosition: "bottom"
+	});
+});
+</script>
+
+<div id="beer-products" class="coda-slider">
+  <?php foreach ($collection as $item): ?>
+  <?php $m = $item->getData();?>
+    <div>
+      <div class="hi-left-img-div">
+        <img class="hi-left-img" src="<?php echo $item->getImageUrl(); ?>"/>
+      </div>
+      <div>
+        <h1 class="red-h"> <?php echo $m['name']; ?> </h1>
+        <h1 class="gray-h"> <?php echo $m['brand']; ?> </h1>
+
+        <div class="br-box br-info-card">
+          <h3>Info Card </h3>
+          <p> <?php echo $m['description']; ?> </p>
+        </div>
+
+        <div class="br-box br-info-pack">
+          Pack 1 - 24 x 330ml Bottles
+          Pack 2 - 12 x 750ml Bottles
+          Pack 3 - 6 x 750ml Bottles
+          Pack 4 - 30ltr Steel Keg
+        </div>
+
+        <div class="br-box br-price-box">
+          <?php echo $m['price']; ?>
+        </div>
+        <span>note: need to fix styling </span>
+      </div>
+    </div>
+  <?php endforeach; ?>
+
+  <?php
+  // echo "<pre>";
+  // var_dump($m);
+  // echo "</pre>";
+   ?>
+</div>

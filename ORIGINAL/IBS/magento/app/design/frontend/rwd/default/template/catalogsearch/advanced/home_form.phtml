@@ -1,0 +1,98 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Catalog advanced search form
+ *
+ * @see Mage_CatalogSearch_Block_Advanced_Form
+ */
+?>
+<?php $maxQueryLength= $this->helper('catalogsearch')->getMaxQueryLength();?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<div id="ibs_home_search" class="sidebar_item">
+
+  <div class="filter_title">
+    <h2 class="title"><?php echo $this->__('Search Beers') ?></h2>
+  </div>
+<form action="<?php echo $this->getUrl('catalogsearch/advanced/result') ?>" method="get" id="form-validate">
+<?php
+$att_country = Mage::getSingleton('eav/config')->getAttribute('catalog_product', 'country_of_manufacture');
+$att_brewery = Mage::getSingleton('eav/config')->getAttribute('catalog_product', 'brewery');
+$att_style = Mage::getSingleton('eav/config')->getAttribute('catalog_product', 'style');
+
+$options_country = $att_country->usesSource()?$att_country->getSource()->getAllOptions(false):array();
+$options_brewery = $att_brewery->usesSource()?$att_brewery->getSource()->getAllOptions(false):array();
+$options_style = $att_style->usesSource()?$att_style->getSource()->getAllOptions(false):array();
+
+function beer_populate_dropdown_options($options) {
+  $str = "";
+  foreach ($options as $option) {
+    if($option['value'] != "") {
+      $str .= '<option value="'.$option['value'].'">'.$option['label'].'</option>';
+    }
+  }
+  return $str;
+}
+?>
+    <div class="fieldset advanced-search">
+        <ul class="form-list" id="advanced-search-list">
+          <li>
+            <div class="input-box">
+              <select name="country_of_manufacture" id="country_of_manufacture" class="multiselect" title="Country">
+                <option value="">BEERS BY COUNTRY</option>
+                <?php echo beer_populate_dropdown_options($options_country); ?>
+              </select>
+          </li>
+          <li>
+            <div class="input-box">
+              <select name="brewery" id="brewery" class="multiselect" title="Brewery">
+                <option value="">BREWERY</option>
+                <?php echo beer_populate_dropdown_options($options_brewery); ?>
+              </select>
+          </li>
+          <li>
+            <div class="input-box">
+              <select name="style" id="style" class="multiselect" title="Sub Style">
+                <option value="">BEER STYLES</option>
+                <?php echo beer_populate_dropdown_options($options_style); ?>
+              </select>
+          </li>
+        </ul>
+    </div>
+    <div class="buttons-set" id="advanced-home-search-submit">
+        <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Search')) ?>"
+          class="beer-btn beer-red btn-fix">
+          <?php echo $this->__('SEARCH') ?>
+        </button>
+    </div>
+</form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>

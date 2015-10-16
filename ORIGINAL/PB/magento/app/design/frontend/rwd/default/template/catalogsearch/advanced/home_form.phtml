@@ -1,0 +1,176 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Catalog advanced search form
+ *
+ * @see Mage_CatalogSearch_Block_Advanced_Form
+ */
+?>
+<?php $maxQueryLength= $this->helper('catalogsearch')->getMaxQueryLength();?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<div id="ibs_home_search" class="sidebar_item">
+
+  <div class="filter_title">
+    <h2 class="title"><?php echo $this->__('Search') ?></h2> &nbsp;
+    <select name="category" id="category" class="multiselect" title="Category">
+      <option value="">Category</option>
+      <option value="1">Beers</option>
+      <option value="2">Ciders</option>
+      <option value="3">Spirits</option>
+    </select>
+  </div>
+<form action="<?php echo $this->getUrl('catalogsearch/advanced/result') ?>" method="get" id="form-validate">
+<?php
+$att_country = Mage::getSingleton('eav/config')->getAttribute('catalog_product', 'country_of_manufacture');
+$att_brewery = Mage::getSingleton('eav/config')->getAttribute('catalog_product', 'brewery');
+$att_style = Mage::getSingleton('eav/config')->getAttribute('catalog_product', 'style');
+
+$options_country = $att_country->usesSource()?$att_country->getSource()->getAllOptions(false):array();
+$options_brewery = $att_brewery->usesSource()?$att_brewery->getSource()->getAllOptions(false):array();
+$options_style = $att_style->usesSource()?$att_style->getSource()->getAllOptions(false):array();
+
+function beer_populate_dropdown_options($options) {
+  $str = "";
+  foreach ($options as $option) {
+    if($option['value'] != "") {
+      $str .= '<option value="'.$option['value'].'">'.$option['label'].'</option>';
+    }
+  }
+  return $str;
+}
+?>
+    <div class="fieldset advanced-search">
+        <ul class="form-list" id="advanced-search-list">
+          <li>
+            <div class="input-box">
+              <select name="country_of_manufacture" id="country_of_manufacture" class="multiselect" title="Country">
+                <option value="">Country</option>
+                <?php echo beer_populate_dropdown_options($options_country); ?>
+              </select>
+            </div>
+          </li>
+          <li>
+            <div class="input-box">
+              <select name="brewery" id="brewery" class="multiselect" title="Brewery">
+                <option value="">Brand</option>
+                <?php echo beer_populate_dropdown_options($options_brewery); ?>
+              </select>
+            </div>
+          </li>
+          <li>
+            <div class="input-box">
+              <select name="style" id="style" class="multiselect" title="Sub Style">
+                <option value="">Style</option>
+                <?php echo beer_populate_dropdown_options($options_style); ?>
+              </select>
+            </div>
+          </li>
+          <li>
+            <div class="input-box">
+              <a href="staff-picks" class="beer-btn beer-white align-left"> Monthly Staff Picks </a>
+            </div>
+          </li>
+        </ul>
+    </div>
+    <div class="buttons-set" id="advanced-home-search-submit">
+      <button id="submit_btn" type="button" class="button go-fetch-btn">Go Fetch Woof <i class="woof-icon"></i></button>
+    </div>
+</form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+//]]>
+
+jQuery.noConflict();
+jQuery(document).ready(function(){
+
+  var $submit_btn = jQuery("#submit_btn");
+  var $form_validate = jQuery('#form-validate');
+  var $category = jQuery('#category');
+  var $country = jQuery('#country_of_manufacture');
+  var $brewery = jQuery('#brewery');
+  var $style = jQuery('#style');
+
+  function countrySubmitHandler() {
+    var cat_str = "<input type='hidden' name='pb_category' value='"+$category.val()+"' />";
+    var country_str = "<input type='hidden' name='pb_country' value='"+$country.children("option").filter(":selected").text()+"' />";
+    $form_validate.append(cat_str);
+    $form_validate.append(country_str);
+    return true;
+  }
+
+  function brewerySubmitHandler() {
+    var cat_str = "<input type='hidden' name='pb_category' value='"+$category.val()+"' />";
+    var country_str = "<input type='hidden' name='pb_country' value='"+$country.children("option").filter(":selected").text()+"' />";
+    var brewery_str = "<input type='hidden' name='pb_brewery' value='"+$brewery.children("option").filter(":selected").text()+"' />";
+    $form_validate.append(cat_str);
+    $form_validate.append(country_str);
+    $form_validate.append(brewery_str);
+    return true;
+  }
+
+  function productSubmitHandler() {
+    var cat_str = "<input type='hidden' name='pb_category' value='"+$category.val()+"' />";
+    var country_str = "<input type='hidden' name='pb_country' value='"+$country.children("option").filter(":selected").text()+"' />";
+    var brewery_str = "<input type='hidden' name='pb_brewery' value='"+$brewery.children("option").filter(":selected").text()+"' />";
+    var style_str = "<input type='hidden' name='pb_style' value='"+$style.children("option").filter(":selected").text()+"' />";
+    $form_validate.append(cat_str);
+    $form_validate.append(country_str);
+    $form_validate.append(brewery_str);
+    $form_validate.append(style_str);
+    return true;
+  }
+
+  $submit_btn.click(function() {
+
+    if($category.val() != "" && $country.val() != "" && $brewery.val() != "" && $style.val() != "") {
+      productSubmitHandler();
+      $form_validate.attr('action', "products").submit();
+      console.log('product serach');
+    }
+    else if($category.val() != "" && $country.val() != "" && $brewery.val() != "") {
+      brewerySubmitHandler();
+      $form_validate.attr('action', "history").submit();
+      console.log('brewery history');
+    }
+    else if($category.val() != "" && $country.val() != "") {
+      countrySubmitHandler();
+      $form_validate.attr('action', "history").submit();
+      console.log('country history');
+    }
+    else {
+      console.log($category.val());
+      console.log($country.val());
+      console.log($brewery.val());
+      console.log($style.val());
+    }
+
+  });
+});
+</script>
